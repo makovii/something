@@ -5,11 +5,15 @@ import { IUserRepository } from "../interface/repository.interface";
 import { UserEntity } from "../entity/user.entity";
 import { UserService } from "../service/user.service";
 import { User } from "./user.model";
+import { CONTAINER_TYPES } from "../container/TYPES";
+import { inject, injectable } from "inversify";
+import { UserMapper } from "../user.mapper";
 
 @Injectable()
 export class UserRepository implements IUserRepository {
   constructor(
     @InjectModel('User') private userModel: Model<User>,
+    @inject(CONTAINER_TYPES.UserService) private readonly userService: UserService,
   ) {}
 
   async getMe(id: string): Promise<UserEntity> {
@@ -21,7 +25,7 @@ export class UserRepository implements IUserRepository {
     } else {
       newUser = exist;
     }
-
-    return newUser;
+    const user = UserMapper.RepositoryToEntity(newUser, this, this.userService);
+    return user;
   }
 }
