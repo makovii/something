@@ -1,8 +1,8 @@
 import { Provider } from "@nestjs/common";
-import { UserRepository } from "./customer.repository";
+import { UserRepository } from "./user.repository";
 
 
 export const UserRepoProvider: Provider = {
-    provide: 'UsereRepo',
+    provide: 'UserRepo',
     useClass: UserRepository,
 }

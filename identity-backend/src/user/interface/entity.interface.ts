@@ -1,4 +1,4 @@
-import { UserEntity } from "../entiry/user.entity";
+import { UserEntity } from "../entity/user.entity";
 
 
 export interface IUserEntity {

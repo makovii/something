@@ -2,15 +2,14 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Document, Model, Types } from "mongoose";
 import { IUserRepository } from "../interface/repository.interface";
-import { UserEntity } from "../entiry/user.entity";
+import { UserEntity } from "../entity/user.entity";
 import { UserService } from "../service/user.service";
-import { User } from "./customer.model";
+import { User } from "./user.model";
 
 @Injectable()
 export class UserRepository implements IUserRepository {
   constructor(
     @InjectModel('User') private userModel: Model<User>,
-    private userService: UserService,
   ) {}
 
   async getMe(id: string): Promise<UserEntity> {
